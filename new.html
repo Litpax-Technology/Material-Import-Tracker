@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Import Order — Litpax</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <a class="brand" href="index.html">
+      <span class="logo">&#9099;</span>
+      <span class="btxt">Material Import Tracker</span>
+    </a>
+    <nav>
+      <a href="index.html">Dashboard</a>
+      <a href="new.html" class="active">+ New Order</a>
+    </nav>
+  </header>
+
+  <main class="container" style="max-width: 760px;">
+    <div class="page-title">New Import Order</div>
+    <div class="page-sub">Order details bharo — Order ID apne aap ban jayega (IMP-XXXX)</div>
+
+    <div class="card">
+      <h3><span class="step-no">1</span> Order Details</h3>
+      <div class="grid">
+        <div class="field">
+          <label>Item Type *</label>
+          <select id="itemType"><option value="">Select...</option></select>
+        </div>
+        <div class="field">
+          <label>Supplier *</label>
+          <select id="supplier"><option value="">Select...</option></select>
+        </div>
+        <div class="field">
+          <label>Quantity *</label>
+          <input type="text" id="qty" placeholder="e.g. 5000 pcs">
+        </div>
+        <div class="field">
+          <label>Mode</label>
+          <select id="mode">
+            <option value="">Not decided yet</option>
+            <option value="Sea">Sea</option>
+            <option value="Air">Air</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3><span class="step-no">2</span> Value (optional)</h3>
+      <div class="grid">
+        <div class="field">
+          <label>Currency</label>
+          <select id="currency"><option value="">Select...</option></select>
+        </div>
+        <div class="field">
+          <label>Order Value</label>
+          <input type="text" id="orderValue" placeholder="e.g. 25000">
+        </div>
+        <div class="field">
+          <label>INR Value (approx)</label>
+          <input type="text" id="inrValue" placeholder="e.g. 2100000">
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3><span class="step-no">3</span> Approval</h3>
+      <div class="grid">
+        <div class="field">
+          <label>Approved By *</label>
+          <select id="approvedBy"><option value="">Select...</option></select>
+        </div>
+        <div class="field">
+          <label>Negotiation Done</label>
+          <select id="negotiationDone">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Final Price Locked</label>
+          <select id="priceLocked">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex; gap:10px;">
+      <button class="btn" id="createBtn">Create Order</button>
+      <a href="index.html" class="btn secondary">Cancel</a>
+    </div>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="config.js"></script>
+  <script src="common.js"></script>
+  <script src="new.js"></script>
+</body>
+</html>

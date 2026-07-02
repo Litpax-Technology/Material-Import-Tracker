@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Details — Litpax Import Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <a class="brand" href="index.html">
+      <span class="logo">&#9099;</span>
+      <span class="btxt">Material Import Tracker</span>
+    </a>
+    <nav>
+      <a href="index.html">Dashboard</a>
+      <a href="new.html">+ New Order</a>
+    </nav>
+  </header>
+
+  <main class="container" style="max-width: 900px;">
+    <div class="loader" id="loader"><div class="spinner"></div>Loading order...</div>
+
+    <div id="orderView" class="hidden">
+      <div class="actions-bar">
+        <div>
+          <div class="page-title" id="orderTitle">IMP-0000</div>
+          <div class="page-sub" id="orderSub"></div>
+        </div>
+        <div id="statusBadgeWrap"></div>
+      </div>
+
+      <!-- Progress tracker -->
+      <div class="tracker" id="tracker"></div>
+
+      <!-- 1. Order & Approval -->
+      <div class="card">
+        <h3><span class="step-no">1</span> Order &amp; Approval</h3>
+        <div class="grid">
+          <div class="field"><label>Item Type</label><input type="text" id="f_ItemType" readonly></div>
+          <div class="field"><label>Supplier</label><input type="text" data-field="Supplier" id="f_Supplier"></div>
+          <div class="field"><label>Quantity</label><input type="text" data-field="Qty" id="f_Qty"></div>
+          <div class="field"><label>Approved By</label><input type="text" data-field="Approved By" id="f_ApprovedBy"></div>
+          <div class="field"><label>Currency</label><input type="text" data-field="Currency" id="f_Currency"></div>
+          <div class="field"><label>Order Value</label><input type="text" data-field="Order Value" id="f_OrderValue"></div>
+          <div class="field"><label>INR Value</label><input type="text" data-field="INR Value" id="f_INRValue"></div>
+          <div class="field"><label>Negotiation Done</label>
+            <select data-field="Negotiation Done" id="f_NegotiationDone"><option>No</option><option>Yes</option></select>
+          </div>
+          <div class="field"><label>Final Price Locked</label>
+            <select data-field="Price Locked" id="f_PriceLocked"><option>No</option><option>Yes</option></select>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Payment -->
+      <div class="card">
+        <h3><span class="step-no">2</span> Payment to Supplier</h3>
+        <div class="grid">
+          <div class="field"><label>Advance Paid</label>
+            <select data-field="Advance Paid" id="f_AdvancePaid"><option>No</option><option>Yes</option></select>
+          </div>
+          <div class="field"><label>Advance Date</label><input type="date" data-field="Advance Date" id="f_AdvanceDate"></div>
+          <div class="field"><label>Full Payment</label>
+            <select data-field="Full Payment" id="f_FullPayment"><option>No</option><option>Yes</option></select>
+          </div>
+          <div class="field"><label>Full Payment Date</label><input type="date" data-field="Full Payment Date" id="f_FullPaymentDate"></div>
+        </div>
+      </div>
+
+      <!-- 3. Shipment -->
+      <div class="card">
+        <h3><span class="step-no">3</span> Shipment &amp; Tracking</h3>
+        <div class="grid">
+          <div class="field"><label>Mode</label>
+            <select data-field="Mode" id="f_Mode">
+              <option value="">Not decided</option><option>Sea</option><option>Air</option>
+            </select>
+          </div>
+          <div class="field air-only"><label>AWB No (Air)</label><input type="text" data-field="AWB No" id="f_AWBNo"></div>
+          <div class="field sea-only"><label>BL Received</label>
+            <select data-field="BL Received" id="f_BLReceived"><option>No</option><option>Yes</option></select>
+          </div>
+          <div class="field"><label>Freight Tracking No</label><input type="text" data-field="Freight Tracking No" id="f_FreightNo"></div>
+          <div class="field sea-only"><label>Vessel No</label><input type="text" data-field="Vessel No" id="f_VesselNo"></div>
+          <div class="field sea-only"><label>Vessel Details</label><input type="text" data-field="Vessel Details" id="f_VesselDetails"></div>
+          <div class="field sea-only"><label>Vessel Date</label><input type="date" data-field="Vessel Date" id="f_VesselDate"></div>
+          <div class="field sea-only"><label>Container No</label><input type="text" data-field="Container No" id="f_ContainerNo"></div>
+          <div class="field sea-only"><label>Container Date</label><input type="date" data-field="Container Date" id="f_ContainerDate"></div>
+        </div>
+
+        <div class="sea-only" style="margin-top:16px; display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+          <input type="file" id="blFile" accept=".pdf,.jpg,.jpeg,.png" style="font-size:13px;">
+          <button class="btn secondary small" id="uploadBLBtn">Upload BL</button>
+          <span id="blLinkWrap"></span>
+        </div>
+      </div>
+
+      <!-- 4. Customs -->
+      <div class="card">
+        <h3><span class="step-no">4</span> Customs Clearance</h3>
+        <div class="grid">
+          <div class="field"><label>Custom Docs Done</label>
+            <select data-field="Customs Docs Done" id="f_CustomsDocs"><option>No</option><option>Yes</option></select>
+          </div>
+          <div class="field"><label>Duty Paid</label>
+            <select data-field="Duty Paid" id="f_DutyPaid"><option>No</option><option>Yes</option></select>
+          </div>
+          <div class="field"><label>Under Examination</label>
+            <select data-field="Under Examination" id="f_UnderExam"><option>No</option><option>Yes</option></select>
+          </div>
+          <div class="field exam-only"><label>Exam Docs Provided</label>
+            <select data-field="Exam Docs Provided" id="f_ExamDocs"><option>No</option><option>Yes</option></select>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Delivery -->
+      <div class="card">
+        <h3><span class="step-no">5</span> Delivery</h3>
+        <div class="grid">
+          <div class="field"><label>Material Delivered</label>
+            <select data-field="Delivered" id="f_Delivered"><option>No</option><option>Yes</option></select>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:10px; margin-bottom:24px;">
+        <button class="btn" id="saveBtn">Save Changes</button>
+        <a href="index.html" class="btn secondary">Back to Dashboard</a>
+      </div>
+
+      <!-- History -->
+      <div class="card">
+        <h3>Update History</h3>
+        <ul class="timeline" id="historyList"></ul>
+        <div class="empty hidden" id="historyEmpty" style="padding:20px;">Abhi tak koi update nahi.</div>
+      </div>
+    </div>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="config.js"></script>
+  <script src="common.js"></script>
+  <script src="order.js"></script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Material Import Tracker — Litpax</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <a class="brand" href="index.html">
+      <span class="logo">&#9099;</span>
+      <span class="btxt">Material Import Tracker</span>
+    </a>
+    <nav>
+      <a href="index.html" class="active">Dashboard</a>
+      <a href="new.html">+ New Order</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="actions-bar">
+      <div>
+        <div class="page-title">Import Orders</div>
+        <div class="page-sub">Cell / BMS / Charger imports — order se delivery tak</div>
+      </div>
+      <a href="new.html" class="btn">+ New Import Order</a>
+    </div>
+
+    <div class="pipeline" id="pipeline"></div>
+
+    <div class="filters">
+      <input type="text" id="searchBox" placeholder="Search — Order ID, supplier, vessel, container...">
+      <select id="itemFilter">
+        <option value="">All Items</option>
+      </select>
+      <select id="modeFilter">
+        <option value="">All Modes</option>
+        <option value="Sea">Sea</option>
+        <option value="Air">Air</option>
+      </select>
+      <button class="btn secondary small" id="refreshBtn">&#8635; Refresh</button>
+    </div>
+
+    <div class="loader" id="loader"><div class="spinner"></div>Loading orders...</div>
+
+    <div class="table-wrap hidden" id="tableWrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Date</th>
+            <th>Item</th>
+            <th>Supplier</th>
+            <th>Qty</th>
+            <th>Mode</th>
+            <th>Status</th>
+            <th>Last Updated</th>
+          </tr>
+        </thead>
+        <tbody id="ordersBody"></tbody>
+      </table>
+    </div>
+
+    <div class="empty hidden" id="emptyState">
+      Koi order nahi mila. <a href="new.html">Pehla import order banao &rarr;</a>
+    </div>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="config.js"></script>
+  <script src="common.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>

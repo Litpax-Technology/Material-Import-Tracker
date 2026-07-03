@@ -300,6 +300,24 @@ tbody tr:last-child td { border-bottom: none; }
 .tstep.current .tlabel { color: var(--accent); font-weight: 700; }
 .tstep.skip { opacity: 0.4; }
 
+/* ---------- Mini progress dots (dashboard) ---------- */
+.mini-progress { display: inline-flex; align-items: center; gap: 3px; }
+.mini-progress .mdot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #e6e8f0;
+}
+.mini-progress .mdot.on { background: var(--accent); }
+.mini-progress .mdot.now {
+  background: var(--accent);
+  box-shadow: 0 0 0 2.5px rgba(99,91,255,0.25);
+}
+
+/* Tracker ke checkpoints ke neeche dates */
+.tstep .tdate { font-size: 10px; color: var(--muted); margin-top: 2px; }
+.tstep.done .tdate, .tstep.current .tdate { color: var(--accent); font-weight: 600; }
+
 /* ---------- Timeline / history ---------- */
 .timeline { list-style: none; }
 .timeline li {

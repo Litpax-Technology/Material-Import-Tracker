@@ -123,14 +123,27 @@ function renderTracker(o) {
   const examRelevant = status === 'Under Examination' ||
     String(o['Under Examination']).toLowerCase() === 'yes';
 
+  // Har checkpoint ke neeche uski relevant date (jo bhari ho)
+  const stageDates = {
+    'Order Created':  o['Created Date'],
+    'Advance Paid':   o['Advance Date'],
+    'Payment Done':   o['Full Payment Date'],
+    'In Transit':     o['Vessel Date'] || o['Container Date'],
+    'Closed':         '' // Delivered pe Last Updated dikhate hain
+  };
+  if (status === 'Closed') stageDates['Closed'] = o['Last Updated'];
+
   const t = document.getElementById('tracker');
   t.innerHTML = STATUS_ORDER.map((s, i) => {
     let cls = 'tstep';
     if (i < idx) cls += ' done';
     if (i === idx) cls += ' current';
     if (s === 'Under Examination' && !examRelevant) cls += ' skip';
+    const d = stageDates[s] || '';
     return '<div class="' + cls + '"><div class="dot">' +
-      (i < idx ? '&#10003;' : '') + '</div><div class="tlabel">' + esc(s) + '</div></div>';
+      (i < idx ? '&#10003;' : '') + '</div><div class="tlabel">' + esc(s) + '</div>' +
+      (d ? '<div class="tdate">' + esc(String(d).split(' ')[0]) + '</div>' : '') +
+      '</div>';
   }).join('');
 }
 

@@ -116,6 +116,7 @@ function renderTable() {
       '<td>' + esc(o['Supplier']) + '</td>' +
       '<td>' + esc(o['Qty']) + '</td>' +
       '<td>' + esc(o['Mode'] || '—') + '</td>' +
+      '<td>' + miniProgress(o['Current Status']) + '</td>' +
       '<td>' + statusBadge(o['Current Status']) + '</td>' +
       '<td>' + esc(o['Last Updated']) + '</td>' +
     '</tr>'

@@ -52,6 +52,19 @@ const STATUS_ORDER = [
   'In Transit', 'Under Examination', 'Cleared', 'Closed'
 ];
 
+// Mini progress dots — dashboard rows ke liye
+function miniProgress(status) {
+  const idx = STATUS_ORDER.indexOf(status || 'Order Created');
+  let html = '<span class="mini-progress" title="' + esc(status || 'Order Created') + '">';
+  STATUS_ORDER.forEach((s, i) => {
+    let cls = 'mdot';
+    if (i < idx) cls += ' on';
+    if (i === idx) cls += ' now';
+    html += '<span class="' + cls + '"></span>';
+  });
+  return html + '</span>';
+}
+
 function statusBadge(status) {
   const cls = STATUS_CLASS[status] || 's-created';
   return '<span class="badge ' + cls + '">' + esc(status || 'Order Created') + '</span>';
